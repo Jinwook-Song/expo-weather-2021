@@ -1,21 +1,73 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, StatusBar } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 
-export default function Weather({ temp }) {
+const weatherOptions = {
+  Haze: {
+    iconName: "weather-hail",
+    gradient: ["#4DA0B0", "#D39D38"],
+  },
+  Thunderstorm: {
+    iconName: "",
+    gradient: [],
+  },
+  Drizzle: {
+    iconName: "",
+    gradient: [],
+  },
+  Rain: {
+    iconName: "",
+    gradient: [],
+  },
+  Snow: {
+    iconName: "",
+    gradient: [],
+  },
+  Atmosphere: {
+    iconName: "",
+    gradient: [],
+  },
+  Clear: {
+    iconName: "",
+    gradient: [],
+  },
+  Clouds: {
+    iconName: "",
+    gradient: [],
+  },
+  Haze: {
+    iconName: "",
+    gradient: [],
+  },
+  Mist: {
+    iconName: "",
+    gradient: [],
+  },
+  Dust: {
+    iconName: "",
+    gradient: [],
+  },
+};
+
+export default function Weather({ temp, condition }) {
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      style={styles.container}
+      colors={weatherOptions[condition].gradient}
+    >
+      <StatusBar barStyle="light-content" />
       <View style={styles.halfContainer}>
         <MaterialCommunityIcons
-          name="weather-lightning-rainy"
+          name={weatherOptions[condition].iconName}
           size={96}
-          color="black"
+          color="white"
         />
         <Text style={styles.temp}>{temp}º</Text>
       </View>
       <View style={styles.halfContainer}></View>
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -43,6 +95,7 @@ const styles = StyleSheet.create({
   },
   temp: {
     fontSize: 42,
+    color: "white",
   },
   halfContainer: {
     flex: 1,
